@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.kairos.planning.executioner.TaskPlanningSolverTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 427.203 sec
