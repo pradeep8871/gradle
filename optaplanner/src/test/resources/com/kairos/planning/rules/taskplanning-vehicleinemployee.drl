@@ -87,11 +87,28 @@ salience 5
 end
 
 rule "Vehicle skill"
-salience 6
+salience 9
     when
         Task(employee!=null && employee.getVehicle()!=null && $missingVehicleSkill:employee.getMissingSkillCountForVehicle())
     then
         scoreHolder.addHardConstraintMatch(kcontext,9,  - $missingVehicleSkill);
+end
+
+rule "Affinity"
+salience 10
+    when
+        Task(employee!=null && isForbidenStaff() && !taskType.isForbiddenAllow())
+    then
+        scoreHolder.addHardConstraintMatch(kcontext,10,  - 1);
+end
+
+
+rule "priorityTask"
+salience 10
+    when
+        Task(priority==3 && (employee==null || taskAssignedNotInTime())
+    then
+        scoreHolder.addHardConstraintMatch(kcontext,11,  - 10);
 end
 
 
@@ -124,6 +141,14 @@ salience 3
         Employee (vehicle!=null && vehicle==$vehicle && id!=$id)
     then
         scoreHolder.addSoftConstraintMatch(kcontext,4,- 1);
+end
+
+rule "Affinity As Soft contraints"
+salience 3
+    when
+        Task(employee!=null && isForbidenStaff())
+    then
+        scoreHolder.addSoftConstraintMatch(kcontext,5,  - 1);
 end
 /*
 rule "AllVehicleUsage"

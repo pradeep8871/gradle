@@ -134,7 +134,7 @@ public class TaskPlanningSolution {
 	}
 
 	@XStreamConverter(BendableScoreXStreamConverter.class)
-	@PlanningScore(bendableHardLevelsSize = 10, bendableSoftLevelsSize = 5)
+	@PlanningScore(bendableHardLevelsSize = 12, bendableSoftLevelsSize = 7)
 	private BendableLongScore score;
 
 }

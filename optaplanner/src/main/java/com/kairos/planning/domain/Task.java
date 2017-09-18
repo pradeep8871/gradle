@@ -1,6 +1,7 @@
 package com.kairos.planning.domain;
 
 import java.util.Arrays;
+import java.util.List;
 
 import com.kairos.planning.executioner.TaskPlanningGenerator;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
@@ -24,6 +25,8 @@ public class Task  extends TaskOrEmployee {
             graphType = PlanningVariableGraphType.CHAINED)
     private TaskOrEmployee previousTaskOrEmployee;
     private String taskName;
+	private List<Long> preferedStaffIds;
+	private List<Long> forbidenStaffIds;
 
   	public void setSlaDuration(int slaDuration) {
   		this.slaDuration = slaDuration;
@@ -46,10 +49,23 @@ public class Task  extends TaskOrEmployee {
 
 	private Long[] brokenHardConstraints;
 
-    
-    
-    
-    
+
+	public List<Long> getPreferedStaffIds() {
+		return preferedStaffIds;
+	}
+
+	public void setPreferedStaffIds(List<Long> preferedStaffIds) {
+		this.preferedStaffIds = preferedStaffIds;
+	}
+
+	public List<Long> getForbidenStaffIds() {
+		return forbidenStaffIds;
+	}
+
+	public void setForbidenStaffIds(List<Long> forbidenStaffIds) {
+		this.forbidenStaffIds = forbidenStaffIds;
+	}
+
 	public String getTaskName() {
 		return taskName;
 	}
@@ -416,6 +432,22 @@ public class Task  extends TaskOrEmployee {
 
 	public void setRouteId(String routeId) {
 		this.routeId = routeId;
+	}
+
+	public boolean isForbidenStaff(){
+		if(this.getEmployee()!=null && this.forbidenStaffIds.contains(this.getEmployee().getId())){
+			return true;
+		}
+		return false;
+	}
+
+	public boolean taskAssignedNotInTime(){
+		DateTime startTime = getInitialStartTime().plusMinutes(slaDuration);
+		//DateTime endTime = getInitialEndTime().plusMinutes(slaEndDuration);
+		if(this.getEmployee()!=null && (getPlannedStartTime().isBefore(startTime) || getPlannedEndTime().isAfter(initialEndTime))){
+			return true;
+		}
+		return false;
 	}
 }
 

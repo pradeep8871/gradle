@@ -11,6 +11,7 @@ public class TaskType {
 	private String code;
 	private String title;
 	private Long baseDuration;
+	private boolean isForbiddenAllow;
 	private List<Skill> requiredSkillList=new ArrayList<Skill>();
 
 	public TaskType() {
@@ -26,6 +27,14 @@ public class TaskType {
 		this.title = title;
 		this.baseDuration = baseDuration;
 		this.requiredSkillList = requiredSkillList;
+	}
+
+	public boolean isForbiddenAllow() {
+		return isForbiddenAllow;
+	}
+
+	public void setForbiddenAllow(boolean forbiddenAllow) {
+		isForbiddenAllow = forbiddenAllow;
 	}
 
 	public Long getId() {

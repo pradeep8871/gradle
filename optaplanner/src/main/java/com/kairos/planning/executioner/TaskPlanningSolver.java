@@ -232,9 +232,9 @@ public class TaskPlanningSolver {
 	private void toXml(TaskPlanningSolution solution, Map<Task, Indictment> indictmentMap, String fileName) throws Exception {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
-		xstream.toXML(solution,new PrintStream(new File("/media/pradeep/bak/solved.xml") ));
+		xstream.toXML(solution,new PrintStream(new File("/media/pradeep/bak/solved.xml")));
 	}
-	public void writeXml(String xmlString) throws Exception{
+	/*public void writeXml(String xmlString) throws Exception{
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder = factory.newDocumentBuilder();
 			// Use String reader
@@ -247,6 +247,6 @@ public class TaskPlanningSolver {
 			Result dest = new StreamResult( new File("/media/pradeep/bak/solved.xml") );
 			aTransformer.transform( src, dest );
 	}
-
+*/
 
 }
